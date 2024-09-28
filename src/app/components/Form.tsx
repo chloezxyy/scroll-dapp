@@ -9,7 +9,7 @@ import { Loader2 } from "lucide-react";
 import { ConfirmedDialog } from "@/app/components/Dialog";
 import { AccountType } from "@/app/page";
 
-// TODO @chloe call api, save data using TransactionResponse's timestamp and recepient address and amount sent
+// TODO @chloe call api, save data using ether's TransactionResponse's timestamp and recepient address and amount sent
 
 export default function Form({ balance }: AccountType) {
   const [formValues, setFormValues] = useState({
@@ -19,12 +19,11 @@ export default function Form({ balance }: AccountType) {
   const [amountError, setAmountError] = useState("");
   const [addressError, setAddressError] = useState("");
 
-  // const [txConfirmed, setTxConfirmed] =
-  //   useState<ethers.TransactionReceipt | null>();
+  // to display confirmation dialog when transaction is successful
   const [txHash, setTxHash] = useState<string | null>(null);
-  const [isPending, setIsPending] = useState(false);
 
-  console.log({ isPending });
+  // to display loading spinner when sending transaction
+  const [isPending, setIsPending] = useState(false);
 
   useEffect(() => {
     // validate address
@@ -37,6 +36,9 @@ export default function Form({ balance }: AccountType) {
     // validate amount
     if (parseFloat(formValues.value) > parseFloat(balance || "0")) {
       setAmountError("Insufficient balance");
+    } else if (isNaN(Number(formValues.value))) {
+      // check if user input is not a number
+      setAmountError("Please enter a valid amount");
     } else {
       setAmountError("");
     }
@@ -50,12 +52,9 @@ export default function Form({ balance }: AccountType) {
   // function to trigger when user press send
   const submitForm = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
-      console.log("click");
-      console.log({ formValues });
       e.preventDefault();
       try {
         setIsPending(true);
-        console.log("inside try");
         const ethereum = window.ethereum;
         // Request account access if needed
         await ethereum.enable();
@@ -68,7 +67,7 @@ export default function Form({ balance }: AccountType) {
         const value = formValues.value;
 
         // Calculate amount to transfer in wei
-        const weiAmountValue = parseEther(value); // parseInt(ETHAmountValue) * 10**18
+        const weiAmountValue = parseEther(value);
 
         // Form the transaction request for sending ETH
         const transactionRequest = {
