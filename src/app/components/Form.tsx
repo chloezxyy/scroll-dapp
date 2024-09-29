@@ -15,7 +15,11 @@ export interface TransactionType {
   id?: number;
 }
 
-export default function Form({ balance }: AccountType) {
+export default function Form(accountData: AccountType) {
+  const { balance } = accountData;
+
+  const isConnected = Object.keys(accountData).length !== 0;
+
   const [formValues, setFormValues] = useState({
     address: "",
     value: "",
@@ -163,6 +167,7 @@ export default function Form({ balance }: AccountType) {
 
         <Button
           disabled={
+            !isConnected ||
             isPending ||
             addressError !== "" ||
             amountError !== "" ||

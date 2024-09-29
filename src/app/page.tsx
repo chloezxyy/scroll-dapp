@@ -28,6 +28,7 @@ export default function Home() {
     });
     // Get the connected Ethereum address
     const address = accounts[0];
+
     // Create an ethers.js provider using the injected provider from MetaMask
     // Get the account balance
     const balance = await provider.getBalance(address);
@@ -43,6 +44,16 @@ export default function Home() {
       network: displayNetworkName(network),
     });
   }
+
+  const disconnectMetamask = async () => {
+    if (typeof ethereum !== "undefined" && ethereum.request) {
+      await ethereum.request({
+        method: "wallet_requestPermissions",
+        params: [{ eth_accounts: {} }],
+      });
+      setAccountData({});
+    }
+  };
 
   const connectToMetaMask = async () => {
     // Check if MetaMask is installed
@@ -83,9 +94,7 @@ export default function Home() {
           {accountData?.address ? (
             <div className="w-[170px]">
               <button
-                onClick={() => {
-                  // disconnect wallet
-                }}
+                onClick={disconnectMetamask}
                 className="flex flex-row bg-gray-800 hover:bg-gray-600 active:bg-gray-500 p-4 rounded-[10px] gap-x-2"
               >
                 <span className=""> 🟢</span>
