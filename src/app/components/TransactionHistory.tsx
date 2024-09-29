@@ -30,7 +30,7 @@ export default function TransactionHistory() {
   }
 
   return (
-    <div className="flex flex-col gap-4 mt-10">
+    <div className="flex flex-col gap-4 mt-10 text-sm md:text-base">
       <h2 className="text-lg font-bold">Transaction History</h2>
       <div className="flex flex-col gap-2">
         <div className="flex flex-row justify-between">
@@ -42,12 +42,16 @@ export default function TransactionHistory() {
         {history.toReversed().map((transaction: TransactionType, index) => (
           <ol
             key={transaction?.id || index}
-            className="flex flex-row justify-between"
+            className="flex flex-row justify-between w-full"
           >
             <li>{index + 1}.</li>
-            <li>{transaction.recipientAddress}</li>
+            <li className="w-[100px] md:w-fit truncate">
+              {transaction.recipientAddress}
+            </li>
             <li>{transaction.amount}</li>
-            <li>{transaction.timestamp}</li>
+            <li className="truncate w-[100px] md:w-fit ">
+              {new Date(transaction.timestamp).toUTCString()}
+            </li>
           </ol>
         ))}
       </div>

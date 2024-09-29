@@ -3,8 +3,8 @@ import { useWallet } from "@/providers/WalletProvider";
 export const WalletDetails = () => {
   const { accountData } = useWallet();
   return (
-    <div className="px-6 md:px-12 sm:px-2 w-full flex items-center justify-center">
-      <div className="flex flex-row gap-8 justify-center text-black w-full">
+    <div className="w-full flex items-center justify-center">
+      <div className="flex items-center text-sm md:text-base flex-row gap-8 justify-center text-black w-fit">
         <div className="flex items-center gap-2">
           <span>
             {parseFloat(accountData.balance ?? "0").toFixed(5) ?? "Balance"}

@@ -13,7 +13,7 @@ export const ConnectWalletButton: React.FC = () => {
             className="flex flex-row bg-gray-800 hover:bg-gray-600 active:bg-gray-500 p-4 rounded-[10px] gap-x-2"
           >
             <span className=""> 🟢</span>
-            <span className="w-[100px] text-white">
+            <span className="max-w-[100px] text-white">
               {truncateMiddleText(accountData?.address) ?? "Wallet Address"}
             </span>
           </button>
@@ -22,7 +22,7 @@ export const ConnectWalletButton: React.FC = () => {
         <button
           disabled={isConnecting}
           onClick={connectToMetaMask}
-          className="bg-gray-800 hover:bg-gray-600 active:bg-gray-500 text-white p-4 rounded-lg w-fit"
+          className="bg-gray-800 hover:bg-gray-600 active:bg-gray-500 text-white p-4 rounded-lg w-full"
         >
           Connect Wallet
         </button>

@@ -143,13 +143,17 @@ export default function Form() {
   }, [txHash]);
 
   return (
-    <section>
-      <form onSubmit={submitForm} className="relative grid gap-y-3 mt-3">
+    <section className="w-full text-sm md:text-base flex-shrink">
+      <form onSubmit={submitForm} className="grid gap-y-3 mt-3 w-full">
         <div>
           {/*  Transfer Amount */}
-          <div className="flex flex-row justify-between">
-            <span>How much do you want to transfer?</span>
-            <span>Available: {parseFloat(balance || "0").toFixed(5)} ETH</span>
+          <div className="flex md:flex-row justify-between w-full">
+            <span className="flex-1">How much do you want to transfer?</span>
+            <div className="flex flex-2 justify-end">
+              <span className="truncate">
+                Available: {parseFloat(balance || "0").toFixed(5)} ETH
+              </span>
+            </div>
           </div>
 
           <Input name="value" placeholder="Amount" onChange={handleChange} />
