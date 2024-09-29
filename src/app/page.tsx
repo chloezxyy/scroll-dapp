@@ -71,7 +71,6 @@ export default function Home() {
             <div className="w-[170px]">
               <div className="flex flex-row bg-gray-700 p-3 rounded-[10px] gap-x-2">
                 <span className=""> 🟢</span>
-                {/* TODO @chloe truncate */}
                 <span className="w-[100px] text-white">
                   {truncateMiddleText(accountData?.address) ?? "Wallet Address"}
                 </span>

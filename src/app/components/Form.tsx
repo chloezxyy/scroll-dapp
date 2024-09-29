@@ -5,11 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect, useCallback } from "react";
 import { Loader2 } from "lucide-react";
-
 import { ConfirmedDialog } from "@/app/components/Dialog";
 import { AccountType } from "@/app/page";
-
-// TODO @chloe call api, save data using ether's TransactionResponse's timestamp and recepient address and amount sent
 
 export interface TransactionType {
   recipientAddress: string;
