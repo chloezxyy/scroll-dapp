@@ -22,6 +22,10 @@ export default function TransactionHistory({ amount }: { amount?: string }) {
     fetchHistory();
   }, [amount]);
 
+  if (!history.length) {
+    return null;
+  }
+
   return (
     <div className="flex flex-col gap-4 mt-10">
       <h2 className="text-lg font-bold">Transaction History</h2>
