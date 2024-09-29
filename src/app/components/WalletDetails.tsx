@@ -1,4 +1,4 @@
-import { useWallet } from "@/providers/WalletContextProvider";
+import { useWallet } from "@/providers/WalletProvider";
 
 export const WalletDetails = () => {
   const { accountData } = useWallet();

@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useState, useEffect, useCallback } from "react";
 import { Loader2 } from "lucide-react";
 import { ConfirmedDialog } from "@/app/components/Dialog";
-import { useWallet } from "@/providers/WalletContextProvider";
+import { useWallet } from "@/providers/WalletProvider";
 
 export interface TransactionType {
   recipientAddress: string;
@@ -144,7 +144,7 @@ export default function Form() {
 
   return (
     <section>
-      <form onSubmit={submitForm} className="relative grid gap-y-3 mt-10">
+      <form onSubmit={submitForm} className="relative grid gap-y-3 mt-3">
         <div>
           {/*  Transfer Amount */}
           <div className="flex flex-row justify-between">

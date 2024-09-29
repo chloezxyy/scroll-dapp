@@ -1,4 +1,4 @@
-import { useWallet } from "@/providers/WalletContextProvider";
+import { useWallet } from "@/providers/WalletProvider";
 import { truncateMiddleText } from "@/lib/utils";
 
 export const ConnectWalletButton: React.FC = () => {

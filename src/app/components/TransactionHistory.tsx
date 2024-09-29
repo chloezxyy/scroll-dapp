@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { TransactionType } from "@/app/components/Form";
-import { useWallet } from "@/providers/WalletContextProvider";
+import { useWallet } from "@/providers/WalletProvider";
 
 export default function TransactionHistory() {
   const { accountData } = useWallet();

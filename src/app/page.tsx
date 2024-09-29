@@ -3,7 +3,7 @@
 import { WalletDetails } from "@/app/components/WalletDetails";
 import Form from "@/app/components/Form";
 import TransactionHistory from "@/app/components/TransactionHistory";
-import { WalletProvider } from "@/providers/WalletContextProvider";
+import { WalletProvider } from "@/providers/WalletProvider";
 import { ConnectWalletButton } from "@/app/components/ConnectWalletButton";
 
 export default function Home() {
