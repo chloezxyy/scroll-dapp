@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useState, useEffect, useCallback } from "react";
 import { Loader2 } from "lucide-react";
 import { ConfirmedDialog } from "@/app/components/Dialog";
-import { AccountType } from "@/app/page";
+import { useWallet } from "@/providers/WalletContextProvider";
 
 export interface TransactionType {
   recipientAddress: string;
@@ -15,7 +15,8 @@ export interface TransactionType {
   id?: number;
 }
 
-export default function Form(accountData: AccountType) {
+export default function Form() {
+  const { accountData } = useWallet();
   const { balance } = accountData;
 
   const isConnected = Object.keys(accountData).length !== 0;

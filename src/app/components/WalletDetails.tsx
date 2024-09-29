@@ -1,11 +1,14 @@
-import { AccountType } from "@/app/page";
+import { useWallet } from "@/providers/WalletContextProvider";
 
-export const WalletDetails = ({ balance, chainId, network }: AccountType) => {
+export const WalletDetails = () => {
+  const { accountData } = useWallet();
   return (
     <div className="px-6 md:px-12 sm:px-2 w-full flex items-center justify-center">
       <div className="flex flex-row gap-8 justify-center text-black w-full">
         <div className="flex items-center gap-2">
-          <span>{parseFloat(balance ?? "0").toFixed(5) ?? "Balance"}</span>
+          <span>
+            {parseFloat(accountData.balance ?? "0").toFixed(5) ?? "Balance"}
+          </span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width={24}
@@ -23,7 +26,7 @@ export const WalletDetails = ({ balance, chainId, network }: AccountType) => {
           </svg>
         </div>
         <div className="flex gap-2 item-center">
-          <span>{chainId ?? "Chain ID"}</span>
+          <span>{accountData.chainId ?? "Chain ID"}</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width={24}
@@ -41,7 +44,7 @@ export const WalletDetails = ({ balance, chainId, network }: AccountType) => {
           </svg>
         </div>
         <div className="flex gap-2 item-center">
-          <span>{network ?? "Network"}</span>
+          <span>{accountData.network ?? "Network"}</span>
           <svg
             className="svg-icon"
             width={24}

@@ -2,8 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { TransactionType } from "@/app/components/Form";
+import { useWallet } from "@/providers/WalletContextProvider";
 
-export default function TransactionHistory({ amount }: { amount?: string }) {
+export default function TransactionHistory() {
+  const { accountData } = useWallet();
+  const { balance } = accountData;
   const [history, setHistory] = useState<TransactionType[]>([]);
 
   // Fetch transaction history; when account balance changes
@@ -20,7 +23,7 @@ export default function TransactionHistory({ amount }: { amount?: string }) {
     }
 
     fetchHistory();
-  }, [amount]);
+  }, [balance]);
 
   if (!history.length) {
     return null;
