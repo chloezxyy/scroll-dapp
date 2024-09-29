@@ -42,14 +42,14 @@ export default function TransactionHistory() {
         {history.toReversed().map((transaction: TransactionType, index) => (
           <ol
             key={transaction?.id || index}
-            className="flex flex-row justify-between w-full"
+            className="flex flex-row justify-between w-full text-black"
           >
             <li>{index + 1}.</li>
             <li className="w-[100px] md:w-fit truncate">
               {transaction.recipientAddress}
             </li>
             <li>{transaction.amount}</li>
-            <li className="truncate w-[100px] md:w-fit ">
+            <li className="truncate w-[100px] md:w-fit">
               {new Date(transaction.timestamp).toUTCString()}
             </li>
           </ol>

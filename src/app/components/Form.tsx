@@ -55,6 +55,9 @@ export default function Form() {
         const provider = new ethers.BrowserProvider(ethereum);
         const signer = await provider.getSigner();
 
+        const timestamp = await provider.getBlock(1);
+        console.log({ timestamp });
+
         // form values
         const address = formValues.address as `0x${string}`;
         const value = formValues.value;
@@ -72,16 +75,17 @@ export default function Form() {
         const txReceipt = (await signer.sendTransaction(
           transactionRequest,
         )) as ethers.TransactionResponse;
-        console.log({ txReceipt });
 
         const confirmed = (await txReceipt.wait()) as ethers.TransactionReceipt; // Resolves to the TransactionReceipt once the transaction has been included in the chain for confirms blocks
+        const blockNumber = confirmed.blockNumber;
+        const block = await provider.getBlock(blockNumber);
 
         setTxHash(confirmed.status === 1 ? confirmed.hash : null);
         setTransactionData({
           recipientAddress: address,
           amount: value,
-          timestamp: new Date().toISOString(),
-          // timestamp: txReceipt.timestamp.toString(),
+          timestamp: new Date((block?.timestamp || 1) * 1000).toISOString(),
+          // timestamp: new Date().toISOString(),
         } as TransactionType);
       } catch (error: unknown) {
         if (error instanceof Error) {
@@ -129,7 +133,9 @@ export default function Form() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          transactionData,
+          recipientAddress: transactionData?.recipientAddress,
+          amount: transactionData?.amount,
+          timestamp: transactionData?.timestamp,
         }),
       })
         .then((res) => {
