@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { TransactionType } from "@/app/components/Form";
+import { TransactionType } from "@/components/Form";
 import { useWallet } from "@/providers/WalletProvider";
 
 export default function TransactionHistory() {

@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect, useCallback } from "react";
 import { Loader2 } from "lucide-react";
-import { ConfirmedDialog } from "@/app/components/Dialog";
+import { ConfirmedDialog } from "@/components/Dialog";
 import { useWallet } from "@/providers/WalletProvider";
 
 export interface TransactionType {

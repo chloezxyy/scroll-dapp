@@ -1,4 +1,4 @@
-####                     
+####                           
 
 #### To run the project
 
@@ -69,6 +69,21 @@ https://sepolia.scrollscan.com/tx/0x4ba2da8a88d8af1fa6a0a9fcbc60dfb70ea8cf78f3bd
 
 - Implement a mobile-responsive design.
   ![img_11.png](img_11.png)
+
+### Technical Details
+
+```
+📦 src
+└─ app
+   ├─ components  // Reusable components
+   ├─ history     // api routes for /transaction history
+   ├─ lib         // utility functions
+   ├─ providers   // Context providers - WalletProvider
+   ├─ types       // Typescript types
+   └─ page.tsx    // Landing page
+```
+
+### Technologies Used
 
 ### Future Improvements
 

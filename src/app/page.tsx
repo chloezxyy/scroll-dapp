@@ -1,10 +1,10 @@
 "use client";
 
-import { WalletDetails } from "@/app/components/WalletDetails";
-import Form from "@/app/components/Form";
-import TransactionHistory from "@/app/components/TransactionHistory";
+import { WalletDetails } from "@/components/WalletDetails";
+import Form from "@/components/Form";
+import TransactionHistory from "@/components/TransactionHistory";
 import { WalletProvider } from "@/providers/WalletProvider";
-import { ConnectWalletButton } from "@/app/components/ConnectWalletButton";
+import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 
 export default function Home() {
   return (
