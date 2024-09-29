@@ -1,4 +1,4 @@
-####                  
+####                     
 
 #### To run the project
 
@@ -56,7 +56,8 @@ https://sepolia.scrollscan.com/tx/0x4ba2da8a88d8af1fa6a0a9fcbc60dfb70ea8cf78f3bd
 #### Transaction History:
 
 - Store the transfer details (recipient address, amount, timestamp) in a mock backend using Next.js API routes.
-- Display the transaction history on the front-end in a list format.
+- Display the transaction history on the front-end in a list format. (Please refresh the page to see the latest
+  transaction)
   ![img_10.png](img_10.png)
 
 #### Responsive Design:
@@ -68,3 +69,10 @@ https://sepolia.scrollscan.com/tx/0x4ba2da8a88d8af1fa6a0a9fcbc60dfb70ea8cf78f3bd
 
 - Implement a mobile-responsive design.
   ![img_11.png](img_11.png)
+
+### Future Improvements
+
+1. Use a real backend to store the transaction history.
+2. Use `wagmi` to interact with Metamask wallet and handle transactions.
+    - Edge cases: UI will not reflect changes during account switch.
+    - 
