@@ -73,11 +73,17 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const disconnectMetamask = async () => {
     if (typeof ethereum !== "undefined" && ethereum.request) {
-      await ethereum.request({
-        method: "wallet_requestPermissions",
-        params: [{ eth_accounts: {} }],
-      });
+      // await ethereum.request({
+      //   method: "wallet_requestPermissions",
+      //   params: [{ eth_accounts: {} }],
+      // });
       setAccountData({});
+      if (ethereum) {
+        console.log("trigger disconnect");
+        ethereum.on("disconnect", () => {
+          window.location.reload();
+        });
+      }
     }
   };
 
