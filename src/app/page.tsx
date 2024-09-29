@@ -4,6 +4,8 @@ import { WalletDetails } from "@/app/components/WalletDetails";
 import { useState, useCallback } from "react";
 import { ethers } from "ethers";
 import Form from "@/app/components/Form";
+import TransactionHistory from "@/app/components/TransactionHistory";
+import { truncateMiddleText } from "@/lib/utils";
 
 export interface AccountType {
   address?: string;
@@ -62,15 +64,16 @@ export default function Home() {
   return (
     <div className="flex justify-center min-h-screen items-center p-8 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)] max-w-5xl mx-auto">
       <main className="grid gap-y-5 w-full">
+        <WalletDetails {...accountData} />
         <div className="flex flex-row w-full items-center justify-between">
-          <span>Scroll Web dApp</span>
+          <h1 className="text-lg font-bold">Scroll Web dApp</h1>
           {accountData?.address ? (
             <div className="w-[170px]">
-              <div className="flex flex-row bg-gray-800 p-3 rounded-[10px] gap-x-2">
+              <div className="flex flex-row bg-gray-700 p-3 rounded-[10px] gap-x-2">
                 <span className=""> 🟢</span>
                 {/* TODO @chloe truncate */}
-                <span className="w-[100px] truncate text-white">
-                  {accountData?.address ?? "Wallet Address"}
+                <span className="w-[100px] text-white">
+                  {truncateMiddleText(accountData?.address) ?? "Wallet Address"}
                 </span>
               </div>
             </div>
@@ -84,8 +87,9 @@ export default function Home() {
             </button>
           )}
         </div>
-        <WalletDetails {...accountData} />
+
         <Form {...accountData} />
+        <TransactionHistory amount={accountData.balance} />
       </main>
     </div>
   );
