@@ -1,4 +1,4 @@
-import { transactions } from "./data";
+import { transactions, Transaction } from "./data";
 
 export async function GET() {
   return Response.json(transactions);
@@ -6,12 +6,12 @@ export async function GET() {
 
 export async function POST(request: Request) {
   // to extract the body from the request
-  const transaction = await request.json();
+  const transaction: Omit<Transaction, "id"> = await request.json();
   const newTransaction = {
     id: transactions.length + 1,
     ...transaction,
-  };
-  transactions.push(newTransaction);
+  } as Transaction;
+  (transactions as Transaction[]).push(newTransaction);
   return new Response(JSON.stringify(newTransaction), {
     headers: {
       "Content-Type": "application/json",
