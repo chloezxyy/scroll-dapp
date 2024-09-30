@@ -12,7 +12,7 @@ export default function TransactionHistory() {
   // Fetch transaction history; when account balance changes
   useEffect(() => {
     async function fetchHistory() {
-      const response = await fetch("http://localhost:3000/history", {
+      const response = await fetch("/history", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
