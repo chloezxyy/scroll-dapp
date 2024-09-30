@@ -1,9 +1,11 @@
 import { useWallet } from "@/providers/WalletProvider";
+import { Loader2 } from "lucide-react";
 
 export const WalletDetails = () => {
-  const { accountData } = useWallet();
+  const { accountData, isConnecting } = useWallet();
   return (
     <div className="w-full flex items-center justify-center">
+      {isConnecting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
       <div className="flex items-center text-sm md:text-base flex-row gap-8 justify-center text-black w-fit">
         <div className="flex items-center gap-2">
           <span>
