@@ -17,9 +17,8 @@ export interface TransactionType {
 
 export default function Form() {
   const { accountData } = useWallet();
-  const { balance } = accountData;
 
-  const isConnected = Object.keys(accountData).length !== 0;
+  const isConnected = accountData !== undefined;
 
   const [formValues, setFormValues] = useState({
     address: "",
@@ -108,7 +107,9 @@ export default function Form() {
     }
 
     // validate amount
-    if (parseFloat(formValues.value) > parseFloat(balance || "0")) {
+    if (
+      parseFloat(formValues.value) > parseFloat(accountData?.balance || "0")
+    ) {
       setAmountError("Insufficient balance");
     } else if (isNaN(Number(formValues.value))) {
       // check if user input is not a number
@@ -116,7 +117,7 @@ export default function Form() {
     } else {
       setAmountError("");
     }
-  }, [formValues, balance]);
+  }, [formValues, accountData?.balance]);
 
   // call /history endpoint to save transaction data
   useEffect(() => {
@@ -151,7 +152,8 @@ export default function Form() {
             <span className="flex-1">How much do you want to transfer?</span>
             <div className="flex flex-2 justify-end">
               <span className="truncate">
-                Available: {parseFloat(balance || "0").toFixed(5)} ETH
+                Available: {parseFloat(accountData?.balance || "0").toFixed(5)}{" "}
+                ETH
               </span>
             </div>
           </div>

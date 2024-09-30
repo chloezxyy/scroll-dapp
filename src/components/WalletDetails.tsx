@@ -7,7 +7,7 @@ export const WalletDetails = () => {
       <div className="flex items-center text-sm md:text-base flex-row gap-8 justify-center text-black w-fit">
         <div className="flex items-center gap-2">
           <span>
-            {parseFloat(accountData.balance ?? "0").toFixed(5) ?? "Balance"}
+            {parseFloat(accountData?.balance ?? "0").toFixed(5) ?? "Balance"}
           </span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +26,7 @@ export const WalletDetails = () => {
           </svg>
         </div>
         <div className="flex gap-2 item-center">
-          <span>{accountData.chainId ?? "Chain ID"}</span>
+          <span>{accountData?.chainId ?? "Chain ID"}</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width={24}
@@ -44,7 +44,7 @@ export const WalletDetails = () => {
           </svg>
         </div>
         <div className="flex gap-2 item-center">
-          <span>{accountData.network ?? "Network"}</span>
+          <span>{accountData?.network ?? "Network"}</span>
           <svg
             className="svg-icon"
             width={24}

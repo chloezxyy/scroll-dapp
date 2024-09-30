@@ -6,7 +6,6 @@ import { useWallet } from "@/providers/WalletProvider";
 
 export default function TransactionHistory() {
   const { accountData } = useWallet();
-  const { balance } = accountData;
   const [history, setHistory] = useState<TransactionType[]>([]);
 
   // Fetch transaction history; when account balance changes
@@ -22,11 +21,11 @@ export default function TransactionHistory() {
       setHistory(data);
     }
 
-    fetchHistory();
-  }, [balance]);
+    void fetchHistory();
+  }, [accountData?.balance]);
 
   if (!history.length) {
-    return null;
+    return <h3 className="text-lg font-bold">No Transaction History</h3>;
   }
 
   return (
