@@ -3,7 +3,7 @@
 import { parseEther, ethers, isAddress } from "ethers";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { Loader2 } from "lucide-react";
 import { ConfirmedDialog } from "@/components/Dialog";
 import { useWallet } from "@/providers/WalletProvider";
@@ -43,66 +43,60 @@ export default function Form() {
   };
 
   // function to trigger when user press send
-  const submitForm = useCallback(
-    async (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      try {
-        setIsPending(true);
-        const ethereum = window.ethereum;
-        // Request account access if needed
-        await ethereum.enable();
+  const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      setIsPending(true);
+      const ethereum = window.ethereum;
+      // Request account access if needed
+      await ethereum.enable();
 
-        const provider = new ethers.BrowserProvider(ethereum);
-        const signer = await provider.getSigner();
+      const provider = new ethers.BrowserProvider(ethereum);
+      const signer = await provider.getSigner();
 
-        const timestamp = await provider.getBlock(1);
-        console.log({ timestamp });
+      // form values
+      const address = formValues.address as `0x${string}`;
+      const value = formValues.value;
 
-        // form values
-        const address = formValues.address as `0x${string}`;
-        const value = formValues.value;
+      // Calculate amount to transfer in wei
+      const weiAmountValue = parseEther(value);
 
-        // Calculate amount to transfer in wei
-        const weiAmountValue = parseEther(value);
+      // Form the transaction request for sending ETH
+      const transactionRequest = {
+        to: address,
+        value: weiAmountValue.toString(),
+      };
 
-        // Form the transaction request for sending ETH
-        const transactionRequest = {
-          to: address,
-          value: weiAmountValue.toString(),
-        };
+      // Send the transaction and log the receipt
+      const txReceipt = (await signer.sendTransaction(
+        transactionRequest,
+      )) as ethers.TransactionResponse;
 
-        // Send the transaction and log the receipt
-        const txReceipt = (await signer.sendTransaction(
-          transactionRequest,
-        )) as ethers.TransactionResponse;
+      const confirmed = (await txReceipt.wait()) as ethers.TransactionReceipt; // Resolves to the TransactionReceipt once the transaction has been included in the chain for confirms blocks
+      const blockNumber = confirmed.blockNumber;
+      const block = await provider.getBlock(blockNumber);
 
-        const confirmed = (await txReceipt.wait()) as ethers.TransactionReceipt; // Resolves to the TransactionReceipt once the transaction has been included in the chain for confirms blocks
-        const blockNumber = confirmed.blockNumber;
-        const block = await provider.getBlock(blockNumber);
-
-        setTxHash(confirmed.status === 1 ? confirmed.hash : null);
-        setTransactionData({
-          recipientAddress: address,
-          amount: value,
-          timestamp: new Date((block?.timestamp || 1) * 1000).toISOString(),
-          // timestamp: new Date().toISOString(),
-        } as TransactionType);
-      } catch (error: unknown) {
-        if (error instanceof Error) {
-          alert(`Error connecting to MetaMask: ${error?.message ?? error}`);
-        } else {
-          alert("An unknown error occurred");
-        }
-      } finally {
-        setIsPending(false);
-        setFormValues({
-          address: "",
-          value: "",
-        });
+      setTxHash(confirmed.status === 1 ? confirmed.hash : null);
+      setTransactionData({
+        recipientAddress: address,
+        amount: value,
+        timestamp: new Date((block?.timestamp || 1) * 1000).toISOString(),
+        // timestamp: new Date().toISOString(),
+      } as TransactionType);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        alert(`Error connecting to MetaMask: ${error?.message ?? error}`);
+      } else {
+        alert("An unknown error occurred");
       }
-    },
-    [formValues],
-  );
+    } finally {
+      setIsPending(false);
+      setFormValues({
+        address: "",
+        value: "",
+      });
+    }
+  };
 
   // Validate form values
   useEffect(() => {
@@ -127,7 +121,7 @@ export default function Form() {
   // call /history endpoint to save transaction data
   useEffect(() => {
     if (txHash) {
-      fetch("http://localhost:3000/history", {
+      fetch("/history", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
