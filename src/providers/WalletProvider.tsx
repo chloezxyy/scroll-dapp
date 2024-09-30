@@ -94,7 +94,21 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({
 
   // function to automatically connect to MetaMask if accounts are already connected
   const connectMetamaskOnMount = async () => {
-    if (typeof window !== undefined) {
+    try {
+      setIsConnecting(true);
+      if (typeof window !== undefined) {
+        const accounts = await window.ethereum.request({
+          method: "eth_accounts",
+        });
+        if (accounts.length > 0) {
+          await connectToMetaMask();
+        }
+      }
+    } catch {
+      alert("MetaMask not installed");
+    } finally {
+      setIsConnecting(false);
+    }
   };
 
   // automatically request connection to MetaMask on page load
