@@ -1,4 +1,6 @@
-####                           
+#### Deployment
+
+- The project is deployed on Vercel and can be accessed here: [Scoll Web dApp](https://scroll-dapp-smoky.vercel.app/)
 
 #### To run the project
 
@@ -7,10 +9,31 @@
 3. Run `npm run dev` to start the development server
 4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application
 
+### Technical Details
+
+```
+📦 src
+└─ app
+   └─ components      // Reusable components
+      └─ ui           // generated using `shadcn/ui`
+   ├─ history         // api route for /transaction history
+   ├─ lib             // utility functions
+   ├─ providers       // Context providers - WalletProvider
+   ├─ types           // Typescript types
+   └─ page.tsx        // Landing page
+```
+
+- TypeScript: For type-safe JavaScript development.
+- React: For building the user interface.
+- Tailwind CSS: For styling the components.
+- Ethers.js: For interacting with the Ethereum blockchain.
+- Next.js: For server-side rendering and API routes.
+- Vercel: For deployment.
+
 #### Features
 
 - Landing page
-  ![img.png](img.png)
+  ![img_12.png](img_12.png)
 
 #### Wallet Connection:
 
@@ -66,28 +89,21 @@ https://sepolia.scrollscan.com/tx/0x4ba2da8a88d8af1fa6a0a9fcbc60dfb70ea8cf78f3bd
   Transaction submission spinner:
   ![img_6.png](img_6.png)
 
-
-- Implement a mobile-responsive design.
+- Mobile-responsive design.
   ![img_11.png](img_11.png)
 
-### Technical Details
+### Design decisions
 
-```
-📦 src
-└─ app
-   ├─ components  // Reusable components
-   ├─ history     // api routes for /transaction history
-   ├─ lib         // utility functions
-   ├─ providers   // Context providers - WalletProvider
-   ├─ types       // Typescript types
-   └─ page.tsx    // Landing page
-```
-
-### Technologies Used
+1. Usage of Tailwind to ensure the responsiveness of the application.
+2. Usage of Ethers.js to interact with the Ethereum blockchain.
 
 ### Future Improvements
 
 1. Use a real backend to store the transaction history.
 2. Use `wagmi` to interact with Metamask wallet and handle transactions.
-    - Edge cases: UI will not reflect changes during account switch.
-    - 
+3. E2E testing using Cypress.
+
+#### Side note
+
+- For each pull request, I have added vercel preview for each PR. You can check the PRs for the preview link. This is to
+  ensure that the code is working as expected before merging it to the main branch.
