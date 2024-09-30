@@ -103,7 +103,8 @@ https://sepolia.scrollscan.com/tx/0x4ba2da8a88d8af1fa6a0a9fcbc60dfb70ea8cf78f3bd
 2. Use `wagmi` to interact with Metamask wallet and handle transactions.
 3. E2E testing using Cypress.
 
-#### Side note
+### Side note
 
 - For each pull request, I have added vercel preview for each PR. You can check the PRs for the preview link. This is to
   ensure that the code is working as expected before merging it to the main branch.
+- Please merge the PR on the `develop` branch to the `main` branch to see the latest changes.
