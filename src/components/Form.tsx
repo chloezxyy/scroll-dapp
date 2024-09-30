@@ -80,7 +80,6 @@ export default function Form() {
         recipientAddress: address,
         amount: value,
         timestamp: new Date((block?.timestamp || 1) * 1000).toISOString(),
-        // timestamp: new Date().toISOString(),
       } as TransactionType);
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -122,7 +121,7 @@ export default function Form() {
   // call /history endpoint to save transaction data
   useEffect(() => {
     if (txHash) {
-      fetch("/history", {
+      void fetch("/history", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -132,14 +131,7 @@ export default function Form() {
           amount: transactionData?.amount,
           timestamp: transactionData?.timestamp,
         }),
-      })
-        .then((res) => {
-          console.log({ res });
-          console.log("Transaction saved into DB successfully");
-        })
-        .catch((e) => {
-          console.log("Error while calling /history endpoint", e);
-        });
+      });
     }
   }, [txHash]);
 
