@@ -1,77 +1,114 @@
-# Scroll Web Challenge
+#### Deployment
 
-Welcome to the Scroll Simple Transfer DApp coding challenge! In this task, you will build a decentralized application (DApp) using Next.js, integrating with the Scroll Layer2 network. This challenge will test your ability to develop a fullstack DApp, including front-end UI and blockchain interaction.
+- The project is deployed on Vercel and can be accessed here: [Scoll Web dApp](https://scroll-dapp-smoky.vercel.app/)
 
-## 1. Task Overview
+#### To run the project
 
-Your goal is to build a DApp with the following functionality:
+1. Clone the repository
+2. Run `npm install` to install the dependencies
+3. Run `npm run dev` to start the development server
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application
 
-- Users can connect their wallets (e.g., MetaMask).
-- Display the user’s ETH balance on Scroll Layer2.
-- Implement a simple transfer form that allows users to send ETH to a recipient’s address.
-- Use a mock API to record the transfer history and display it on the front-end.
+### Technical Details
 
----
+```
+📦 src
+└─ app
+   └─ components      // Reusable components
+      └─ ui           // generated using `shadcn/ui`
+   ├─ history         // api route for /transaction history
+   ├─ lib             // utility functions
+   ├─ providers       // Context providers - WalletProvider
+   ├─ types           // Typescript types
+   └─ page.tsx        // Landing page
+```
 
-## 2. Task Requirements
+- TypeScript: For type-safe JavaScript development.
+- React: For building the user interface.
+- Tailwind CSS: For styling the components.
+- Ethers.js: For interacting with the Ethereum blockchain.
+- Next.js: For server-side rendering and API routes.
+- Vercel: For deployment.
 
-- **Use Next.js** to create the project.
-- Implement the application using **TypeScript**.
-- Use **Ethers.js** or **Web3.js** to interact with the Scroll Layer2 network.
-- **Frontend framework**: Use **React** (Next.js default) for the front-end.
-- Create a **mock API** using the Next.js API routes feature to store and return transfer history.
+#### Features
 
-### Application Features
+- Landing page
+  ![img_12.png](img_12.png)
 
 #### Wallet Connection:
 
 - Allow users to connect their wallet using MetaMask.
-- Show the connected wallet’s address and allow the user to disconnect.
+- Show the connected wallet’s address (Click on 'Connect Wallet' button)
+- Allows the user to disconnect (Click on the wallet address button to disconnect the wallet)
+
+![img_1.png](img_1.png)
 
 #### ETH Balance Display:
 
-- Fetch and display the connected user's ETH balance on Scroll Layer2.
+- Fetch and display the connected user's ETH balance on Scroll Layer2. (When wallet connected, UI will retrieve wallet
+  balance, chainId and network name from Ethers.js)
+
+![img_3.png](img_3.png)
+![img_2.png](img_2.png)
 
 #### Transfer Form:
 
+- Validate input fields and handle errors (e.g., insufficient balance, invalid address). ('Send' button will be disabled
+  if the input fields are empty or invalid, or if wallet is not connected)
+  ![img_5.png](img_5.png)
+
+
 - Allow the user to input a recipient’s address and the amount of ETH to transfer.
-- Validate input fields and handle errors (e.g., insufficient balance, invalid address).
-- On successful transfer, display a confirmation message.
+  ![img_4.png](img_4.png)
+
+
+- When user clicks on the 'Send' button, the button will be disabled and display a spinner to indicate that it's
+  processing the transaction.
+  ![img_7.png](img_7.png)
+  ![img_6.png](img_6.png)
+
+
+- On successful transfer, display a confirmation dialog. User is able to check their transaction on block explorer with
+  the given hash. E.g. of the confirmed transaction:
+  `0x4ba2da8a88d8af1fa6a0a9fcbc60dfb70ea8cf78f3bdcf5c1c64ab1971e27cc1`
+  ![img_8.png](img_8.png)
+
+![img_9.png](img_9.png)
+https://sepolia.scrollscan.com/tx/0x4ba2da8a88d8af1fa6a0a9fcbc60dfb70ea8cf78f3bdcf5c1c64ab1971e27cc1
 
 #### Transaction History:
 
 - Store the transfer details (recipient address, amount, timestamp) in a mock backend using Next.js API routes.
-- Display the transaction history on the front-end in a list format.
+- Display the transaction history on the front-end in a list format. (Please refresh the page to see the latest
+  transaction)
+  ![img_10.png](img_10.png)
 
----
-
-## 3. Deployment Instructions
-
-- You are required to deploy your project to a hosting service like **Vercel** or **Netlify**.
-
----
-
-## 4. Testing on Sepolia Test Network
-
-The DApp should be tested on the **Sepolia** test network. Make sure that your application interacts with the Sepolia network during wallet connection, balance retrieval, and transfers.
-
----
-
-## 5. Submission Guidelines
-
-1. **Git Workflow**:
-   - Create a `develop` branch and make 2-3 meaningful commits. Use `rebase` to keep the commit history clean.
-   - Once the feature is complete, submit a Pull Request from `develop` to `main`.
-
-2. **Deliverables**:
-   - The final submission should include:
-     - The **Vercel** or **Netlify** deployment link.
-     - The GitHub repository URL.
-     - Any important design decisions or features added in the README.
-
----
-
-## 6. Bonus (Optional)
+#### Responsive Design:
 
 - Add additional UI/UX enhancements such as loading spinners during wallet connection or transaction submission.
-- Implement a mobile-responsive design.
+  Transaction submission spinner:
+  ![img_6.png](img_6.png)
+
+- Mobile-responsive design.
+  ![img_11.png](img_11.png)
+
+### Design decisions
+
+1. Used `shadcn/ui` for customizing the UI components to have full design control and flexibility, especially if
+   following an internal Design System.
+2. Used `Ethers.js` for interacting with the Ethereum blockchain. It is a popular library for interacting with Ethereum
+   wallets and smart contracts.
+3. Used `Next.js` for server-side rendering and API routes.
+4. To view the latest transaction, please refresh the page.
+
+### Future Improvements
+
+1. Use a real backend to store the transaction history.
+2. Use `wagmi` to interact with Metamask wallet and handle transactions.
+3. E2E testing using Cypress.
+
+### Side note
+
+- For each pull request, I have added vercel preview for each PR. You can check the PRs for the preview link. This is to
+  ensure that the code is working as expected before merging it to the main branch.
+- Please merge the PR on the `develop` branch to the `main` branch to deploy the latest changes.
