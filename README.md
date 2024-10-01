@@ -94,8 +94,11 @@ https://sepolia.scrollscan.com/tx/0x4ba2da8a88d8af1fa6a0a9fcbc60dfb70ea8cf78f3bd
 
 ### Design decisions
 
-1. Usage of Tailwind to ensure the responsiveness of the application.
-2. Usage of Ethers.js to interact with the Ethereum blockchain.
+1. Used `shadcn/ui` for customizing the UI components to have full design control and flexibility, especially if
+   following an internal Design System.
+2. Used `Ethers.js` for interacting with the Ethereum blockchain. It is a popular library for interacting with Ethereum
+   wallets and smart contracts.
+3. Used `Next.js` for server-side rendering and API routes.
 
 ### Future Improvements
 
@@ -107,4 +110,4 @@ https://sepolia.scrollscan.com/tx/0x4ba2da8a88d8af1fa6a0a9fcbc60dfb70ea8cf78f3bd
 
 - For each pull request, I have added vercel preview for each PR. You can check the PRs for the preview link. This is to
   ensure that the code is working as expected before merging it to the main branch.
-- Please merge the PR on the `develop` branch to the `main` branch to see the latest changes.
+- Please merge the PR on the `develop` branch to the `main` branch to deploy the latest changes.
