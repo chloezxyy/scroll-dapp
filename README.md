@@ -99,6 +99,7 @@ https://sepolia.scrollscan.com/tx/0x4ba2da8a88d8af1fa6a0a9fcbc60dfb70ea8cf78f3bd
 2. Used `Ethers.js` for interacting with the Ethereum blockchain. It is a popular library for interacting with Ethereum
    wallets and smart contracts.
 3. Used `Next.js` for server-side rendering and API routes.
+4. To view the latest transaction, please refresh the page.
 
 ### Future Improvements
 

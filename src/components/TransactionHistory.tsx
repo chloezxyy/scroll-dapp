@@ -24,36 +24,39 @@ export default function TransactionHistory() {
     void fetchHistory();
   }, [accountData?.balance]);
 
-  if (!history.length) {
-    return <h3 className="text-lg font-bold">No Transaction History</h3>;
-  }
-
   return (
     <div className="flex flex-col gap-4 mt-10 text-sm md:text-base">
-      <h2 className="text-lg font-bold">Transaction History</h2>
-      <div className="flex flex-col gap-2">
-        <div className="flex flex-row justify-between">
-          <span>#</span>
-          <span>Recipient Address</span>
-          <span>Amount</span>
-          <span>Timestamp</span>
-        </div>
-        {history.toReversed().map((transaction: TransactionType, index) => (
-          <ol
-            key={transaction?.id || index}
-            className="flex flex-row justify-between w-full text-black"
-          >
-            <li>{index + 1}.</li>
-            <li className="w-[100px] md:w-fit truncate">
-              {transaction.recipientAddress}
-            </li>
-            <li>{transaction.amount}</li>
-            <li className="truncate w-[100px] md:w-fit">
-              {new Date(transaction.timestamp).toUTCString()}
-            </li>
-          </ol>
-        ))}
-      </div>
+      {!history.length ? (
+        <h3 className="text-lg font-bold">No Transaction History</h3>
+      ) : (
+        <>
+          <h2 className="text-lg font-bold">Transaction History</h2>
+          <div className="flex flex-col gap-2">
+            <div className="flex flex-row justify-between">
+              <span>#</span>
+              <span>Recipient Address</span>
+              <span>Amount</span>
+              <span>Timestamp</span>
+            </div>
+            {history.toReversed().map((transaction: TransactionType, index) => (
+              <ol
+                key={transaction?.id || index}
+                className="flex flex-row justify-between w-full text-black"
+              >
+                <li>{index + 1}.</li>
+                <li className="w-[100px] md:w-fit truncate">
+                  {transaction.recipientAddress}
+                </li>
+                <li>{transaction.amount}</li>
+                <li className="truncate w-[100px] md:w-fit">
+                  {new Date(transaction.timestamp).toUTCString()}
+                </li>
+              </ol>
+            ))}
+          </div>
+        </>
+      )}
+      <small>Refresh the page to view latest history</small>
     </div>
   );
 }
